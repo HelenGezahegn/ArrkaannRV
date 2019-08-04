@@ -5,10 +5,10 @@ export default class PageContent extends React.Component {
 
   render() {
     return (
-      <Layout>
+      <Layout style={{height: "100%"}}>
         <Layout.Header>Header</Layout.Header>
         <Layout>
-          <Layout.Sider style={{height: "100%"}}>
+          <Layout.Sider>
             <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
               <Menu.Item key="1">
                 <Icon type="form" />
@@ -21,7 +21,7 @@ export default class PageContent extends React.Component {
             </Menu>
           </Layout.Sider>
           <Layout.Content>
-            <Button> thing </Button>
+            <Button type="primary"> thing </Button>
           </Layout.Content>
         </Layout>
       </Layout>

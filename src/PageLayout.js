@@ -1,12 +1,16 @@
 import React from 'react';
-import { Layout, Menu, Icon, Button } from 'antd';
+import { Layout, Menu, Icon } from 'antd';
+import ContentWrapper from './ContentWrapper.js'
 
-export default class PageContent extends React.Component {
+export default class PageLayout extends React.Component {
 
   render() {
     return (
       <Layout style={{height: "100%"}}>
-        <Layout.Header>Header</Layout.Header>
+        <Layout.Header>
+          <img alt="rv logo" className="rv-logo" src="/rvLogo.jpg" />
+          <span className="rv-name" style={{textColor: "#FDD26E"}}> Arrkann RV's Internal Tooling </span>
+        </Layout.Header>
         <Layout>
           <Layout.Sider>
             <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
@@ -21,7 +25,7 @@ export default class PageContent extends React.Component {
             </Menu>
           </Layout.Sider>
           <Layout.Content>
-            <Button type="primary"> thing </Button>
+            <ContentWrapper />
           </Layout.Content>
         </Layout>
       </Layout>

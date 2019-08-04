@@ -1,10 +1,10 @@
 import React from 'react';
-import PageContent from './PageContent.js'
-import "antd/dist/antd.css";
+import PageLayout from './PageLayout.js'
+
 
 function App() {
   return (
-    <PageContent />
+    <PageLayout />
   );
 }
 

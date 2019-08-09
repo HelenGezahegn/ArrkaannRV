@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button, DatePicker, TimePicker } from 'antd';
+import { Form, Button, Input, Select, Row, Col, InputNumber } from 'antd';
 
 class InternalForm extends React.Component {
   handleSubmit = e => {
@@ -10,24 +10,23 @@ class InternalForm extends React.Component {
         return;
       }
 
-      // Should format date value before submit.
-      const rangeValue = fieldsValue['range-picker'];
-      const rangeTimeValue = fieldsValue['range-time-picker'];
       const values = {
         ...fieldsValue,
-        'date-picker': fieldsValue['date-picker'].format('YYYY-MM-DD'),
-        'date-time-picker': fieldsValue['date-time-picker'].format('YYYY-MM-DD HH:mm:ss'),
-        'month-picker': fieldsValue['month-picker'].format('YYYY-MM'),
-        'range-picker': [rangeValue[0].format('YYYY-MM-DD'), rangeValue[1].format('YYYY-MM-DD')],
-        'range-time-picker': [
-          rangeTimeValue[0].format('YYYY-MM-DD HH:mm:ss'),
-          rangeTimeValue[1].format('YYYY-MM-DD HH:mm:ss'),
-        ],
-        'time-picker': fieldsValue['time-picker'].format('HH:mm:ss'),
+        'first-name': fieldsValue['first-name'],
+        'last-name': fieldsValue['last-name'],
+        'make': fieldsValue['make'],
+        'model': fieldsValue['model'],
+        'stk': fieldsValue['stk'],
+        'part-description': fieldsValue['part-description']
       };
       console.log('Received values of form: ', values);
     });
   };
+
+  handleMakeSelectChange(event) {
+    //this is where we need to change the drop down for the model select
+    console.log(event)
+  }
 
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -41,35 +40,56 @@ class InternalForm extends React.Component {
         sm: { span: 16 },
       },
     };
-    const config = {
-      rules: [{ type: 'object', required: true, message: 'Please select time!' }],
+    const requiredConfig = {
+      rules: [{required: true}],
     };
-    const rangeConfig = {
-      rules: [{ type: 'array', required: true, message: 'Please select time!' }],
-    };
+
     return (
       <Form {...formItemLayout} onSubmit={this.handleSubmit}>
-        <Form.Item label="DatePicker">
-          {getFieldDecorator('date-picker', config)(<DatePicker />)}
+        <Form.Item label="First Name:">
+          {getFieldDecorator('first-name', requiredConfig)(<Input placeholder="Jane" style={{width: "200px"}} />)}
         </Form.Item>
-        <Form.Item label="DatePicker[showTime]">
-          {getFieldDecorator('date-time-picker', config)(
-            <DatePicker showTime format="YYYY-MM-DD HH:mm:ss" />,
+        <Form.Item label="Last Name:">
+          {getFieldDecorator('last-name', requiredConfig)(<Input placeholder="Doe" style={{width: "200px"}} />)}
+        </Form.Item>
+        <Row type="flex" justify="center">
+          <Col span = {6}>
+            <Form.Item>
+              {getFieldDecorator('make', requiredConfig)(
+                <Select placeholder="Make" onChange={this.handleMakeSelectChange}>
+                  <Select.Option value="American Coach">American Coach</Select.Option>
+                  <Select.Option value="Coachman">Coachman</Select.Option>
+                  <Select.Option value="Cool Amphibious">Cool Amphibious</Select.Option>
+                </Select>
+              )}
+            </Form.Item>
+          </Col>
+          <Col span= {6}>
+            <Form.Item>
+              {getFieldDecorator('model', requiredConfig)(
+                <Select placeholder="Model">
+                  <Select.Option value="American Coach">American Coach</Select.Option>
+                  <Select.Option value="Coachman">Coachman</Select.Option>
+                  <Select.Option value="Cool Amphibious">Cool Amphibious</Select.Option>
+                </Select>
+              )}
+            </Form.Item>
+          </Col>
+          <Col span = {6}>
+            <Form.Item>
+              {getFieldDecorator('stk', requiredConfig)(<InputNumber min={1000} placeholder="stk #"/>)}
+            </Form.Item>
+          </Col>
+        </Row>
+        <hr />
+        <h1> Tech </h1>
+        <Form.Item label="Part Description:">
+          {getFieldDecorator('part-description', requiredConfig)(
+            <Input.TextArea
+              placeholder="Put a better description here"
+              rows={4}
+              style={{width: "400px"}} />
           )}
-        </Form.Item>
-        <Form.Item label="MonthPicker">
-          {getFieldDecorator('month-picker', config)(<DatePicker.MonthPicker />)}
-        </Form.Item>
-        <Form.Item label="RangePicker">
-          {getFieldDecorator('range-picker', rangeConfig)(<DatePicker.RangePicker />)}
-        </Form.Item>
-        <Form.Item label="RangePicker[showTime]">
-          {getFieldDecorator('range-time-picker', rangeConfig)(
-            <DatePicker.RangePicker showTime format="YYYY-MM-DD HH:mm:ss" />,
-          )}
-        </Form.Item>
-        <Form.Item label="TimePicker">
-          {getFieldDecorator('time-picker', config)(<TimePicker />)}
         </Form.Item>
         <Form.Item
           wrapperCol={{

@@ -1,7 +1,13 @@
-import React from 'react';
-import { Form, Button, Input, Select, Row, Col, InputNumber } from 'antd';
+import React from "react";
+import { Form, Button, Input, Select, Row, Col, InputNumber } from "antd";
+import makeModelConfig from "./MakeModelConfig.js"
 
 class InternalForm extends React.Component {
+
+  state = {
+    modelOptions: null
+  }
+
   handleSubmit = e => {
     e.preventDefault();
 
@@ -12,20 +18,22 @@ class InternalForm extends React.Component {
 
       const values = {
         ...fieldsValue,
-        'first-name': fieldsValue['first-name'],
-        'last-name': fieldsValue['last-name'],
-        'make': fieldsValue['make'],
-        'model': fieldsValue['model'],
-        'stk': fieldsValue['stk'],
-        'part-description': fieldsValue['part-description']
+        "first-name": fieldsValue["first-name"],
+        "last-name": fieldsValue["last-name"],
+        "make": fieldsValue["make"],
+        "model": fieldsValue["model"],
+        "stk": fieldsValue["stk"],
+        "part-description": fieldsValue["part-description"]
       };
-      console.log('Received values of form: ', values);
+      console.log("Received values of form: ", values);
     });
   };
 
-  handleMakeSelectChange(event) {
-    //this is where we need to change the drop down for the model select
-    console.log(event)
+  handleMakeSelectChange = make => {
+    var modelOptions = makeModelConfig[make].map(model => (
+      <Select.Option value={model} key={model}>{model}</Select.Option>
+    ))
+    this.setState({modelOptions});
   }
 
   render() {
@@ -47,44 +55,42 @@ class InternalForm extends React.Component {
     return (
       <Form {...formItemLayout} onSubmit={this.handleSubmit}>
         <Form.Item label="First Name:">
-          {getFieldDecorator('first-name', requiredConfig)(<Input placeholder="Jane" style={{width: "200px"}} />)}
+          {getFieldDecorator("first-name", requiredConfig)(<Input placeholder="Jane" style={{width: "200px"}} />)}
         </Form.Item>
         <Form.Item label="Last Name:">
-          {getFieldDecorator('last-name', requiredConfig)(<Input placeholder="Doe" style={{width: "200px"}} />)}
+          {getFieldDecorator("last-name", requiredConfig)(<Input placeholder="Doe" style={{width: "200px"}} />)}
         </Form.Item>
         <Row type="flex" justify="center">
           <Col span = {6}>
             <Form.Item>
-              {getFieldDecorator('make', requiredConfig)(
+              {getFieldDecorator("make", requiredConfig)(
                 <Select placeholder="Make" onChange={this.handleMakeSelectChange}>
-                  <Select.Option value="American Coach">American Coach</Select.Option>
-                  <Select.Option value="Coachman">Coachman</Select.Option>
-                  <Select.Option value="Cool Amphibious">Cool Amphibious</Select.Option>
+                  {Object.keys(makeModelConfig).map(make => (
+                    <Select.Option value={make} key={make}>{make}</Select.Option>
+                  ))}
                 </Select>
               )}
             </Form.Item>
           </Col>
           <Col span= {6}>
             <Form.Item>
-              {getFieldDecorator('model', requiredConfig)(
+              {getFieldDecorator("model", requiredConfig)(
                 <Select placeholder="Model">
-                  <Select.Option value="American Coach">American Coach</Select.Option>
-                  <Select.Option value="Coachman">Coachman</Select.Option>
-                  <Select.Option value="Cool Amphibious">Cool Amphibious</Select.Option>
+                  {this.state.modelOptions}
                 </Select>
               )}
             </Form.Item>
           </Col>
           <Col span = {6}>
             <Form.Item>
-              {getFieldDecorator('stk', requiredConfig)(<InputNumber min={1000} placeholder="stk #"/>)}
+              {getFieldDecorator("stk", requiredConfig)(<InputNumber min={1000} placeholder="stk #"/>)}
             </Form.Item>
           </Col>
         </Row>
         <hr />
         <h1> Tech </h1>
         <Form.Item label="Part Description:">
-          {getFieldDecorator('part-description', requiredConfig)(
+          {getFieldDecorator("part-description", requiredConfig)(
             <Input.TextArea
               placeholder="Put a better description here"
               rows={4}
@@ -106,4 +112,4 @@ class InternalForm extends React.Component {
   }
 }
 
-export default Form.create({ name: 'internal-form' })(InternalForm);
+export default Form.create({ name: "internal-form" })(InternalForm);

@@ -1,12 +1,8 @@
 import React from "react";
-import { Form, Button, Input, Select, Row, Col, InputNumber } from "antd";
-import makeModelConfig from "./MakeModelConfig.js"
+import { Form, Button, Input, InputNumber, Cascader } from "antd";
+import makeModelConfigCascade from "./MakeModelConfig.js"
 
 class InternalForm extends React.Component {
-
-  state = {
-    modelOptions: null
-  }
 
   handleSubmit = e => {
     e.preventDefault();
@@ -20,21 +16,22 @@ class InternalForm extends React.Component {
         ...fieldsValue,
         "first-name": fieldsValue["first-name"],
         "last-name": fieldsValue["last-name"],
-        "make": fieldsValue["make"],
-        "model": fieldsValue["model"],
+        "makeModel": fieldsValue["makeModelCascade"],
         "stk": fieldsValue["stk"],
-        "part-description": fieldsValue["part-description"]
+        "vin": fieldsValue["vin"],
+        "year": fieldsValue["year"],
+        "part-description": fieldsValue["part-description"],
+        "quantity": fieldsValue["quantity"],
+        "lengthFeet": fieldsValue["lengthFeet"],
+        "lengthInches": fieldsValue["lengthInches"],
+        "widthFeet": fieldsValue["widthFeet"],
+        "widthInches": fieldsValue["widthInches"],
+        "heightFeet": fieldsValue["heightFeet"],
+        "heightInches": fieldsValue["heightInches"],
       };
       console.log("Received values of form: ", values);
     });
   };
-
-  handleMakeSelectChange = make => {
-    var modelOptions = makeModelConfig[make].map(model => (
-      <Select.Option value={model} key={model}>{model}</Select.Option>
-    ))
-    this.setState({modelOptions});
-  }
 
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -60,33 +57,18 @@ class InternalForm extends React.Component {
         <Form.Item label="Last Name:">
           {getFieldDecorator("last-name", requiredConfig)(<Input placeholder="Doe" style={{width: "200px"}} />)}
         </Form.Item>
-        <Row type="flex" justify="center">
-          <Col span = {6}>
-            <Form.Item>
-              {getFieldDecorator("make", requiredConfig)(
-                <Select placeholder="Make" onChange={this.handleMakeSelectChange}>
-                  {Object.keys(makeModelConfig).map(make => (
-                    <Select.Option value={make} key={make}>{make}</Select.Option>
-                  ))}
-                </Select>
-              )}
-            </Form.Item>
-          </Col>
-          <Col span= {6}>
-            <Form.Item>
-              {getFieldDecorator("model", requiredConfig)(
-                <Select placeholder="Model">
-                  {this.state.modelOptions}
-                </Select>
-              )}
-            </Form.Item>
-          </Col>
-          <Col span = {6}>
-            <Form.Item>
-              {getFieldDecorator("stk", requiredConfig)(<InputNumber min={1000} placeholder="stk #"/>)}
-            </Form.Item>
-          </Col>
-        </Row>
+        <Form.Item label="Make and Model:">
+          {getFieldDecorator('makeModelCascade', requiredConfig)(<Cascader options={makeModelConfigCascade} style={{width: "300px"}}/>)}
+        </Form.Item>
+        <Form.Item label="stk:">
+          {getFieldDecorator("stk", requiredConfig)(<InputNumber min={1000} placeholder="stk #"/>)}
+        </Form.Item>
+        <Form.Item label="VIN">
+          {getFieldDecorator("vin", requiredConfig)(<InputNumber min={1000} placeholder="vin"/>)}
+        </Form.Item>
+        <Form.Item label="Year:">
+          {getFieldDecorator("year", requiredConfig)(<InputNumber min={1000} placeholder="year"/>)}
+        </Form.Item>
         <hr />
         <h1> Tech </h1>
         <Form.Item label="Part Description:">
@@ -96,6 +78,46 @@ class InternalForm extends React.Component {
               rows={4}
               style={{width: "400px"}} />
           )}
+        </Form.Item>
+        <Form.Item label="Quantity:">
+          {getFieldDecorator("quantity", requiredConfig)(<InputNumber min={1} placeholder="quantity"/>)}
+        </Form.Item>
+        <Form.Item label="Length:" style={{ marginBottom: 0 }}>
+          <Form.Item
+            style={{ display: 'inline-block'}}
+          >
+            {getFieldDecorator("lengthFeet", requiredConfig)(<InputNumber min={0} placeholder="feet"/>)}
+            <span className="ant-form-text"> ft</span>
+          </Form.Item>
+          <Form.Item
+            style={{ display: 'inline-block' }}>
+            {getFieldDecorator("lengthInches", requiredConfig)(<InputNumber min={0} max={12} placeholder="inches"/>)}
+            <span className="ant-form-text" style={{ position: "absolute", top: "-10px", left: "90px" }}> in</span>
+          </Form.Item>
+        </Form.Item>
+        <Form.Item label="Width:" style={{ marginBottom: 0 }}>
+          <Form.Item
+            style={{ display: 'inline-block'}}>
+            {getFieldDecorator("widthFeet", requiredConfig)(<InputNumber min={0} placeholder="feet"/>)}
+            <span className="ant-form-text"> ft</span>
+          </Form.Item>
+          <Form.Item
+            style={{ display: 'inline-block' }}>
+            {getFieldDecorator("widthInches", requiredConfig)(<InputNumber min={0} max={12} placeholder="inches"/>)}
+            <span className="ant-form-text" style={{ position: "absolute", top: "-10px", left: "90px" }}> in</span>
+          </Form.Item>
+        </Form.Item>
+        <Form.Item label="Height:" style={{ marginBottom: 0 }}>
+          <Form.Item
+            style={{ display: 'inline-block'}}>
+            {getFieldDecorator("heightFeet", requiredConfig)(<InputNumber min={0} placeholder="feet"/>)}
+            <span className="ant-form-text"> ft</span>
+          </Form.Item>
+          <Form.Item
+            style={{ display: 'inline-block' }}>
+            {getFieldDecorator("heightInches", requiredConfig)(<InputNumber min={0} max={12} placeholder="inches"/>)}
+            <span className="ant-form-text" style={{ position: "absolute", top: "-10px", left: "90px" }}> in</span>
+          </Form.Item>
         </Form.Item>
         <Form.Item
           wrapperCol={{

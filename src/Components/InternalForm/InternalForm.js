@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, Button, Input, InputNumber, Cascader } from "antd";
 import makeModelConfigCascade from "./MakeModelConfig.js"
+import TechForm from "./TechForm.js"
 
 class InternalForm extends React.Component {
 
@@ -16,7 +17,7 @@ class InternalForm extends React.Component {
         ...fieldsValue,
         "first-name": fieldsValue["first-name"],
         "last-name": fieldsValue["last-name"],
-        "makeModel": fieldsValue["makeModelCascade"],
+        "makeModel": fieldsValue["makeModel"],
         "stk": fieldsValue["stk"],
         "vin": fieldsValue["vin"],
         "year": fieldsValue["year"],
@@ -58,7 +59,7 @@ class InternalForm extends React.Component {
           {getFieldDecorator("last-name", requiredConfig)(<Input placeholder="Doe" style={{width: "200px"}} />)}
         </Form.Item>
         <Form.Item label="Make and Model:">
-          {getFieldDecorator('makeModelCascade', requiredConfig)(<Cascader options={makeModelConfigCascade} style={{width: "300px"}}/>)}
+          {getFieldDecorator('makeModel', requiredConfig)(<Cascader options={makeModelConfigCascade} style={{width: "300px"}}/>)}
         </Form.Item>
         <Form.Item label="stk:">
           {getFieldDecorator("stk", requiredConfig)(<InputNumber min={1000} placeholder="stk #"/>)}
@@ -69,56 +70,7 @@ class InternalForm extends React.Component {
         <Form.Item label="Year:">
           {getFieldDecorator("year", requiredConfig)(<InputNumber min={1000} placeholder="year"/>)}
         </Form.Item>
-        <hr />
-        <h1> Tech </h1>
-        <Form.Item label="Part Description:">
-          {getFieldDecorator("part-description", requiredConfig)(
-            <Input.TextArea
-              placeholder="Put a better description here"
-              rows={4}
-              style={{width: "400px"}} />
-          )}
-        </Form.Item>
-        <Form.Item label="Quantity:">
-          {getFieldDecorator("quantity", requiredConfig)(<InputNumber min={1} placeholder="quantity"/>)}
-        </Form.Item>
-        <Form.Item label="Length:" style={{ marginBottom: 0 }}>
-          <Form.Item
-            style={{ display: 'inline-block'}}
-          >
-            {getFieldDecorator("lengthFeet", requiredConfig)(<InputNumber min={0} placeholder="feet"/>)}
-            <span className="ant-form-text"> ft</span>
-          </Form.Item>
-          <Form.Item
-            style={{ display: 'inline-block' }}>
-            {getFieldDecorator("lengthInches", requiredConfig)(<InputNumber min={0} max={12} placeholder="inches"/>)}
-            <span className="ant-form-text" style={{ position: "absolute", top: "-10px", left: "90px" }}> in</span>
-          </Form.Item>
-        </Form.Item>
-        <Form.Item label="Width:" style={{ marginBottom: 0 }}>
-          <Form.Item
-            style={{ display: 'inline-block'}}>
-            {getFieldDecorator("widthFeet", requiredConfig)(<InputNumber min={0} placeholder="feet"/>)}
-            <span className="ant-form-text"> ft</span>
-          </Form.Item>
-          <Form.Item
-            style={{ display: 'inline-block' }}>
-            {getFieldDecorator("widthInches", requiredConfig)(<InputNumber min={0} max={12} placeholder="inches"/>)}
-            <span className="ant-form-text" style={{ position: "absolute", top: "-10px", left: "90px" }}> in</span>
-          </Form.Item>
-        </Form.Item>
-        <Form.Item label="Height:" style={{ marginBottom: 0 }}>
-          <Form.Item
-            style={{ display: 'inline-block'}}>
-            {getFieldDecorator("heightFeet", requiredConfig)(<InputNumber min={0} placeholder="feet"/>)}
-            <span className="ant-form-text"> ft</span>
-          </Form.Item>
-          <Form.Item
-            style={{ display: 'inline-block' }}>
-            {getFieldDecorator("heightInches", requiredConfig)(<InputNumber min={0} max={12} placeholder="inches"/>)}
-            <span className="ant-form-text" style={{ position: "absolute", top: "-10px", left: "90px" }}> in</span>
-          </Form.Item>
-        </Form.Item>
+        <TechForm getFieldDecorator={getFieldDecorator} requiredConfig={requiredConfig}/>
         <Form.Item
           wrapperCol={{
             xs: { span: 24, offset: 0 },

@@ -20,6 +20,7 @@ class TechForm extends React.Component {
           {getFieldDecorator("quantity", requiredConfig)(<InputNumber min={1} placeholder="quantity"/>)}
         </Form.Item>
         <Form.Item label="Length:" style={{ marginBottom: 0 }}>
+          {getFieldDecorator("lengthFake", requiredConfig)(<div />)}
           <Form.Item
             style={{ display: 'inline-block'}}
           >
@@ -33,6 +34,7 @@ class TechForm extends React.Component {
           </Form.Item>
         </Form.Item>
         <Form.Item label="Width:" style={{ marginBottom: 0 }}>
+          {getFieldDecorator("widthFake", requiredConfig)(<div />)}
           <Form.Item
             style={{ display: 'inline-block'}}>
             {getFieldDecorator("widthFeet", requiredConfig)(<InputNumber min={0} placeholder="feet"/>)}
@@ -45,6 +47,7 @@ class TechForm extends React.Component {
           </Form.Item>
         </Form.Item>
         <Form.Item label="Height:" style={{ marginBottom: 0 }}>
+          {getFieldDecorator("heightFake", requiredConfig)(<div />)}
           <Form.Item
             style={{ display: 'inline-block'}}>
             {getFieldDecorator("heightFeet", requiredConfig)(<InputNumber min={0} placeholder="feet"/>)}

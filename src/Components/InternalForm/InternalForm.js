@@ -2,6 +2,9 @@ import React from "react";
 import { Form, Button, Input, InputNumber, Cascader } from "antd";
 import makeModelConfigCascade from "./MakeModelConfig.js"
 import TechForm from "./TechForm.js"
+import OrderClerkForm from "./OrderClerkForm.js"
+import WriterForm from "./WriterForm.js"
+import ReceiverForm from "./ReceiverForm.js"
 
 class InternalForm extends React.Component {
 
@@ -71,6 +74,9 @@ class InternalForm extends React.Component {
           {getFieldDecorator("year", requiredConfig)(<InputNumber min={1000} placeholder="year"/>)}
         </Form.Item>
         <TechForm getFieldDecorator={getFieldDecorator} requiredConfig={requiredConfig}/>
+        <OrderClerkForm getFieldDecorator={getFieldDecorator} requiredConfig={requiredConfig}/>
+        <WriterForm getFieldDecorator={getFieldDecorator} requiredConfig={requiredConfig}/>
+        <ReceiverForm getFieldDecorator={getFieldDecorator} requiredConfig={requiredConfig}/>
         <Form.Item
           wrapperCol={{
             xs: { span: 24, offset: 0 },

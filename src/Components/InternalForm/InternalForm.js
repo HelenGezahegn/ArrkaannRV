@@ -17,21 +17,20 @@ class InternalForm extends React.Component {
       }
 
       const values = {
-        ...fieldsValue,
         "first-name": fieldsValue["first-name"],
         "last-name": fieldsValue["last-name"],
-        "makeModel": fieldsValue["makeModel"],
+        "make-model": fieldsValue["make-model"],
         "stk": fieldsValue["stk"],
         "vin": fieldsValue["vin"],
         "year": fieldsValue["year"],
         "part-description": fieldsValue["part-description"],
         "quantity": fieldsValue["quantity"],
-        "lengthFeet": fieldsValue["lengthFeet"],
-        "lengthInches": fieldsValue["lengthInches"],
-        "widthFeet": fieldsValue["widthFeet"],
-        "widthInches": fieldsValue["widthInches"],
-        "heightFeet": fieldsValue["heightFeet"],
-        "heightInches": fieldsValue["heightInches"],
+        "length-feet": fieldsValue["length-feet"],
+        "length-inches": fieldsValue["length-inches"],
+        "width-feet": fieldsValue["width-feet"],
+        "width-inches": fieldsValue["width-inches"],
+        "height-feet": fieldsValue["height-feet"],
+        "height-inches": fieldsValue["height-inches"],
       };
       console.log("Received values of form: ", values);
     });
@@ -62,7 +61,7 @@ class InternalForm extends React.Component {
           {getFieldDecorator("last-name", requiredConfig)(<Input placeholder="Doe" style={{width: "200px"}} />)}
         </Form.Item>
         <Form.Item label="Make and Model:">
-          {getFieldDecorator('makeModel', requiredConfig)(<Cascader options={makeModelConfigCascade} style={{width: "300px"}}/>)}
+          {getFieldDecorator('make-model', requiredConfig)(<Cascader options={makeModelConfigCascade} style={{width: "300px"}}/>)}
         </Form.Item>
         <Form.Item label="stk:">
           {getFieldDecorator("stk", requiredConfig)(<InputNumber min={1000} placeholder="stk #"/>)}

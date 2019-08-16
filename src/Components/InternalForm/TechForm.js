@@ -20,42 +20,38 @@ class TechForm extends React.Component {
           {getFieldDecorator("quantity", requiredConfig)(<InputNumber min={1} placeholder="quantity"/>)}
         </Form.Item>
         <Form.Item label="Length:" style={{ marginBottom: 0 }}>
-          {getFieldDecorator("lengthFake", requiredConfig)(<div />)}
           <Form.Item
-            style={{ display: 'inline-block'}}
-          >
-            {getFieldDecorator("lengthFeet", requiredConfig)(<InputNumber min={0} placeholder="feet"/>)}
+            style={{ display: 'inline-block'}}>
+            {getFieldDecorator("length-feet", requiredConfig)(<InputNumber min={0} placeholder="feet"/>)}
             <span className="ant-form-text"> ft</span>
           </Form.Item>
           <Form.Item
             style={{ display: 'inline-block' }}>
-            {getFieldDecorator("lengthInches", requiredConfig)(<InputNumber min={0} max={12} placeholder="inches"/>)}
+            {getFieldDecorator("length-inches", requiredConfig)(<InputNumber min={0} max={12} placeholder="inches"/>)}
             <span className="ant-form-text" style={{ position: "absolute", top: "-10px", left: "90px" }}> in</span>
           </Form.Item>
         </Form.Item>
         <Form.Item label="Width:" style={{ marginBottom: 0 }}>
-          {getFieldDecorator("widthFake", requiredConfig)(<div />)}
           <Form.Item
             style={{ display: 'inline-block'}}>
-            {getFieldDecorator("widthFeet", requiredConfig)(<InputNumber min={0} placeholder="feet"/>)}
+            {getFieldDecorator("width-feet", requiredConfig)(<InputNumber min={0} placeholder="feet"/>)}
             <span className="ant-form-text"> ft</span>
           </Form.Item>
           <Form.Item
             style={{ display: 'inline-block' }}>
-            {getFieldDecorator("widthInches", requiredConfig)(<InputNumber min={0} max={12} placeholder="inches"/>)}
+            {getFieldDecorator("width-inches", requiredConfig)(<InputNumber min={0} max={12} placeholder="inches"/>)}
             <span className="ant-form-text" style={{ position: "absolute", top: "-10px", left: "90px" }}> in</span>
           </Form.Item>
         </Form.Item>
         <Form.Item label="Height:" style={{ marginBottom: 0 }}>
-          {getFieldDecorator("heightFake", requiredConfig)(<div />)}
           <Form.Item
             style={{ display: 'inline-block'}}>
-            {getFieldDecorator("heightFeet", requiredConfig)(<InputNumber min={0} placeholder="feet"/>)}
+            {getFieldDecorator("height-feet", requiredConfig)(<InputNumber min={0} placeholder="feet"/>)}
             <span className="ant-form-text"> ft</span>
           </Form.Item>
           <Form.Item
             style={{ display: 'inline-block' }}>
-            {getFieldDecorator("heightInches", requiredConfig)(<InputNumber min={0} max={12} placeholder="inches"/>)}
+            {getFieldDecorator("height-inches", requiredConfig)(<InputNumber min={0} max={12} placeholder="inches"/>)}
             <span className="ant-form-text" style={{ position: "absolute", top: "-10px", left: "90px" }}> in</span>
           </Form.Item>
         </Form.Item>
